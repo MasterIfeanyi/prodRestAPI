@@ -162,7 +162,7 @@ router.post("/", productsController.createProduct);
  *                      $ref: "#/components/schemas/Product"
  *      responses:
  *          200:
- *              description: The product description by name
+ *              description: The product was updated
  *          404:
  *              description: The product was not found
  */
@@ -185,8 +185,8 @@ router.put("/:name", productsController.updateAProduct);
  *          required: true
  *          description: The product name
  *      responses:
- *          200:
- *              description: The product description by name
+ *          204:
+ *              description: The product was deleted successfully
  *          404:
  *              description: The product was not found
  */
