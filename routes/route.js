@@ -168,14 +168,45 @@ router.post("/", productsController.createProduct);
  */
 
 
-
-
 router.put("/:name", productsController.updateAProduct);
 
 
-
+/**
+ * @swagger
+ * /home/{name}:
+ *  delete:
+ *      summary: Delete product by name
+ *      tags: [Products]
+ *      parameters:
+ *        - in: path
+ *          name: name
+ *          schema:
+ *              type: string
+ *          required: true
+ *          description: The product name
+ *      responses:
+ *          200:
+ *              description: The product description by name
+ *          404:
+ *              description: The product was not found
+ */
 
 router.delete("/:name", productsController.deleteProductByName);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.delete("/", productsController.deleteAllProducts);
 
