@@ -14,43 +14,21 @@ const swaggerSpecs = require("./docs/swagger.js")
 const {createClient} = require("redis");
 
 
-
+// redis port
 const REDIS_PORT = 6379;
 
-const client = createClient();
+// create redis client
+export const client = createClient();
+
+
 
 (async () => { 
     
     await client.on('error', err => console.log('Error ' + err));
 
     await client.connect(); 
-    
+
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -60,7 +38,7 @@ app.use(express.json())
 
 
 // Connect to MongoDB
-connectDB(); //-> this line
+connectDB(); 
 
 
 // port that the server is listening on.

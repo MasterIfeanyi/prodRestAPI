@@ -1,4 +1,6 @@
 const Products = require("../model/product"); // ->this line
+const redis = require("redis");
+const {client} = require("../index")
 
 const getProducts = async (req, res) => {
     const results = await Products.find({});
@@ -12,12 +14,33 @@ const getProducts = async (req, res) => {
 
 const getProductByName = async(req, res) => {
     const {name} = req.params;
-    const result = await Products.findOne({name});
-    console.log(result)
-    if (result?.length === 0 || !result) {
-        return res.sendStatus(404)
+
+    let result;
+
+    
+    try {
+        
+        // use the key to get data from the cache
+        const cachedData = await redis.get("cachedData");
+
+        // If data exists in the cache, return it
+        if(cachedData) {
+            result = JSON.parse(cachedData);
+        }  else {
+            result = await Products.findOne({name});
+            console.log(result)
+            if (result?.length === 0 || !result) {
+                return res.status(200).send("API returned an empty array");
+            }
+            await client.set(species, JSON.stringify(result));
+        }
+
+        res.json(result);
+
+    } catch (error) {
+        console.error(error);
+        res.status(404).send("Data unavailable");
     }
-    res.json(result);
 }
 
 
