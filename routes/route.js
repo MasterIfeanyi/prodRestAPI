@@ -198,13 +198,22 @@ router.delete("/:name", productsController.deleteProductByName);
 
 
 
-
-
-
-
-
-
-
+/**
+ * @swagger
+ * /home:
+ *  delete:
+ *      summary: delete products endpoint
+ *      tags: [Products]
+ *      description: deletes all products in the database
+ *      responses:
+ *          204: 
+ *              decription: All products were deleted successfully
+ *          404:
+ *              description: No products found
+ *          500:
+ *              description: Internal server error
+ * 
+ */
 
 
 
