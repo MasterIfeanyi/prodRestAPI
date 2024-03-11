@@ -11,10 +11,50 @@ const corsOptions = require("./config/corsOptions")
 
 const swaggerSpecs = require("./docs/swagger.js")
 
+const {createClient} = require("redis");
+
+
+
+const REDIS_PORT = 6379;
+
+const client = createClient();
+
+(async () => { 
+    
+    await client.on('error', err => console.log('Error ' + err));
+
+    await client.connect(); 
+    
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const app = express();
-
-
 
 app.use(express.json())
 
